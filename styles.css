@@ -1,0 +1,13 @@
+body.tools_page_better-redirect #wpbody-content > ul > li {
+	float: left;
+	display: inline;
+}
+
+	body.tools_page_better-redirect #wpbody-content > ul > li + Li { margin-left: 3px; }
+
+body.tools_page_better-redirect #wpbody-content > ul > li select#dropdown_pages {
+	min-width: 50%;
+	max-width: 100%;
+}
+
+#wpadminbar ul#wp-admin-bar-better-redirect-redirects > li#wp-admin-bar-add-better-redirect > a { color: #8c8 !important; }
