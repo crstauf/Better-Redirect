@@ -10,4 +10,8 @@ body.tools_page_better-redirect #wpbody-content > ul > li select#dropdown_pages 
 	max-width: 100%;
 }
 
+body.tools_page_better-redirect #wpbody-content textarea#htaccess_textarea {
+	font-size: 12px;
+}
+
 #wpadminbar ul#wp-admin-bar-better-redirect-redirects > li#wp-admin-bar-add-better-redirect > a { color: #8c8 !important; }
