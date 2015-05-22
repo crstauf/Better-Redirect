@@ -105,11 +105,11 @@ class css_better_redirect {
 		<br style="clear: both;" />
 
 		<form method="post" action="<?php echo admin_url(add_query_arg('page','better-redirect','tools.php')) ?>">
-			<textarea id="htaccess_before" name="htaccess_before" readonly="readonly"><?php echo trim(substr(self::$htaccess,0,self::$start)) ?></textarea>
+			<textarea id="htaccess_before" name="htaccess_before" readonly="readonly" style="display: none;"><?php echo trim(substr(self::$htaccess,0,self::$start)) ?></textarea>
 			<?php
 			if (count(self::$rules))
 				echo '<p><input type="checkbox" id="edit_textarea"> <label for="edit_textarea"><span>Enable</span> textarea manual editing</label></p><textarea name="htaccess_textarea" id="htaccess_textarea" class="code" style="width: 90%; max-width: 90%; height: 300px;" readonly="readonly">' . trim(implode("\n",self::$rules)) . '</textarea><br /><p style="width: 90%; text-align: right;"><input type="reset" value="Cancel" class="button" /> <input type="submit" value="Save" class="button button-primary" /></p>';
-			echo '<textarea name="htaccess_after" id="htaccess_after" readonly="readonly">' . trim(substr(self::$htaccess,self::$end)) . '</textarea>';
+			echo '<textarea name="htaccess_after" id="htaccess_after" readonly="readonly" style="display: none;">' . trim(substr(self::$htaccess,self::$end)) . '</textarea>';
 		echo '</form>';
 
 	}
