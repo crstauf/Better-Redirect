@@ -3,14 +3,22 @@
 Plugin Name: Better Redirect
 Plugin URI: 
 Description: 
-Version: 0.0.1
+Version: 0.0.2
 Author: Caleb Stauffer
 Author URI: http://develop.calebstauffer.com
 */
 
-if (defined('ABSPATH')) {
-	if (is_admin() && (!defined('DOING_AJAX') || !DOING_AJAX)) {
-		if (isset($_POST) && is_array($_POST) && count($_POST)) {
+if (
+	defined('ABSPATH') && 
+	(!defined('WP_INSTALLING') || !WP_INSTALLING) && 
+	(!defined('WP_IMPORTING') || !WP_IMPORTING)
+) {
+	if (
+		is_admin() && 
+		(!defined('DOING_AJAX') || !DOING_AJAX) && 
+		(!defined('DOING_AUTOSAVE') || !DOING_AUTOSAVE)
+	) {
+		if (isset($_POST) && is_array($_POST) && count($_POST) && isset($_POST['htaccess_textarea'])) {
 			file_put_contents(ABSPATH . '.maintenance','<?php $upgrading = time(); ?>');
 			add_action('load-tools_page_better-redirect',array('css_better_redirect','submit'));
 		}
