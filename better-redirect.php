@@ -26,11 +26,8 @@ if (
 		add_action('admin_enqueue_scripts',array('css_better_redirect','depends'));
 		add_action('admin_menu',array('css_better_redirect','admin_menu'));
 		add_action('admin_footer-post.php',array('css_better_redirect','footer'));
-	} else if (!is_admin()) {
-		add_action('wp_enqueue_scripts',array('css_better_redirect','depends'));
-		add_action('admin_bar_menu',array('css_better_redirect','admin_bar'),1000);
-		add_action('wp_footer',array('css_better_redirect','footer'));
-	}
+	} else if (!is_admin())
+		add_action('init',array('css_better_redirect','front'));
 	add_action('wp_ajax_get_better_redirects',array('css_better_redirect','get_redirects'));
 	add_action('wp_ajax_nopriv_get_better_redirects',array('css_better_redirect','get_redirects'));
 }
@@ -45,6 +42,13 @@ class css_better_redirect {
 
 	function __construct() {
 		
+	}
+
+	public static function front() {
+		if (!is_user_logged_in() || !is_admin_bar_showing()) return;
+		add_action('wp_enqueue_scripts',array('css_better_redirect','depends'));
+		add_action('admin_bar_menu',array('css_better_redirect','admin_bar'),1000);
+		add_action('wp_footer',array('css_better_redirect','footer'));
 	}
 
 	public static function depends() {
