@@ -215,7 +215,7 @@ class css_better_redirect {
 		?>
 		<script type="text/javascript">
 			jQuery(function($) {
-				$.post(ajaxurl,{action: 'get_better_redirects',post_id: $("input#post_ID").val()},function(response) {
+				$.post("<?php echo admin_url('admin-ajax.php') ?>",{action: 'get_better_redirects',post_id: $("input#post_ID").val()},function(response) {
 					$("li#wp-admin-bar-better-redirect").html(response);
 				});
 			});
