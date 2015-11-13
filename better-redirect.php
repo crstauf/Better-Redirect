@@ -1,21 +1,21 @@
 <?php
 /*
 Plugin Name: Better Redirect
-Plugin URI: 
-Description: 
+Plugin URI:
+Description:
 Version: 0.0.2
 Author: Caleb Stauffer
 Author URI: http://develop.calebstauffer.com
 */
 
 if (
-	defined('ABSPATH') && 
-	(!defined('WP_INSTALLING') || !WP_INSTALLING) && 
+	defined('ABSPATH') &&
+	(!defined('WP_INSTALLING') || !WP_INSTALLING) &&
 	(!defined('WP_IMPORTING') || !WP_IMPORTING)
 ) {
 	if (
-		is_admin() && 
-		(!defined('DOING_AJAX') || !DOING_AJAX) && 
+		is_admin() &&
+		(!defined('DOING_AJAX') || !DOING_AJAX) &&
 		(!defined('DOING_AUTOSAVE') || !DOING_AUTOSAVE)
 	) {
 		if (isset($_POST) && is_array($_POST) && count($_POST) && isset($_POST['htaccess_textarea']))
@@ -33,13 +33,13 @@ if (
 class css_better_redirect {
 
 	protected static $rules = array();
-	
+
 	protected static $htaccess = false;
 	protected static $start = false;
 	protected static $end = false;
 
 	function __construct() {
-		
+
 	}
 
 	public static function front() {
@@ -173,7 +173,7 @@ class css_better_redirect {
 			<?php
 			wp_die();
 		}
-		
+
 		$permalink = '"' . get_permalink($_REQUEST['post_id']) . '"';
 		$redirects = array();
 		foreach (self::$rules as $rule) {
@@ -181,7 +181,7 @@ class css_better_redirect {
 			if (trim($exploded[3]) == $permalink)
 				$redirects[] = $exploded[1] . ' ' . $exploded[2];
 		}
-		
+
 		if (0 == count($redirects)) {
 			?>
 			<a class="ab-item" href="<?php echo admin_url(add_query_arg('page','better-redirect','tools.php')) ?>">No Redirects</a>
@@ -230,22 +230,22 @@ class CSSBR_Walker_PageDropdown extends Walker_PageDropdown {
 
 	public function start_el( &$output, $page, $depth = 0, $args = array(), $id = 0 ) {
 		$pad = str_repeat('&nbsp;', $depth * 3);
-		
+
 		$output .= "\t<option class=\"level-$depth\" value=\"" . esc_attr( get_permalink( $page->ID ) ) . "\"";
 		if ( $page->ID == $args['selected'] )
 			$output .= ' selected="selected"';
 		$output .= '>';
-	
+
 		$title = $page->post_title;
 		if ( '' === $title ) {
 			$title = sprintf( __( '#%d (no title)' ), $page->ID );
 		}
-	
+
 		$title = apply_filters( 'list_pages', $title, $page );
 		$output .= $pad . esc_html( $title );
 		$output .= "</option>\n";
 	}
-	
+
 }
 
 ?>
