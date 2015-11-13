@@ -18,10 +18,8 @@ if (
 		(!defined('DOING_AJAX') || !DOING_AJAX) && 
 		(!defined('DOING_AUTOSAVE') || !DOING_AUTOSAVE)
 	) {
-		if (isset($_POST) && is_array($_POST) && count($_POST) && isset($_POST['htaccess_textarea'])) {
-			file_put_contents(ABSPATH . '.maintenance','<?php $upgrading = time(); ?>');
+		if (isset($_POST) && is_array($_POST) && count($_POST) && isset($_POST['htaccess_textarea']))
 			add_action('load-tools_page_better-redirect',array('css_better_redirect','submit'));
-		}
 		add_action('load-post.php',array('css_better_redirect','edit_page'));
 		add_action('admin_enqueue_scripts',array('css_better_redirect','depends'));
 		add_action('admin_menu',array('css_better_redirect','admin_menu'));
@@ -135,7 +133,6 @@ class css_better_redirect {
 			if (file_get_contents(ABSPATH . '.htaccess') !== $new) {
 				rename(ABSPATH . '.htaccess',ABSPATH . '.htaccess-backup');
 				file_put_contents(ABSPATH . '.htaccess',$new);
-				unlink(ABSPATH . '.maintenance');
 				wp_redirect(admin_url(add_query_arg('page','better-redirect','tools.php')));
 				echo '<script type="text/javascript">window.location="' . admin_url(add_query_arg('page','better-redirect','tools.php')) . '"</script>';
 				exit();
